@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teşekkürler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .photo {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        #message {
+            position: absolute;
+            bottom: -200px;
+            width: 100%;
+            font-size: 26px;
+            color: #555;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: moveHeart 5s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes moveHeart {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, -50px);
+            }
+            50% {
+                transform: translate(0, 50px);
+            }
+            75% {
+                transform: translate(-50px, -50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Teşekkür Ederim</h1>
+        <img src="thank.jpg" alt="Beni affettiğin için teşekkür ederim" class="photo">
+        <p id="message">Beni affettiğin için çok teşekkür ederim. Seni çok seviyorum balımmmm :)</p>
+    </div>
+
+    <!-- Kalp Emojileri -->
+    <div id="hearts"></div>
+
+    <script>
+        // Kalp emojilerini rastgele sayfa üzerine yerleştirmek için
+        const heartEmojis = ['💖', '❤️', '💘']; // Pembe kalp, kırmızı kalp, ışıltılı kalp
+        const heartCount = 250; // Sayfadaki toplam kalp sayısı
+
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+            // Rastgele bir başlangıç noktası
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+
+            heart.style.left = `${startX}px`;
+            heart.style.top = `${startY}px`;
+
+            // Rastgele bir animasyon hızı
+            const animationDuration = Math.random() * 3 + 2; // 2-5 saniye arası
+            heart.style.animationDuration = `${animationDuration}s`;
+
+            document.getElementById('hearts').appendChild(heart);
+        }
+    </script>
+
+</body>
+</html>

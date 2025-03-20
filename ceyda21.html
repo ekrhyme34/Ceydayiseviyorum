@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özür Dilerim. Beni affedebilir misin?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 30px; /* Sayfa yüksekliğini 30px olarak ayarladık */
+            overflow: hidden;
+        }
+
+        .container {
+            margin-top: 10px; /* Konteynerin yukarıdan 10px kaymasını sağladık */
+        }
+
+        .photo {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .buttons {
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+        }
+
+        #yes {
+            background-color: green;
+            color: white;
+            top: 0; /* Evet butonunu en üste yerleştir */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #no {
+            background-color: red;
+            color: white;
+            top: 60px; /* Hayır butonunun yerini aşağıya kaydır */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #message {
+            margin-top: 80px;
+            color: pink;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Özür Dilerim. Beni affedebilir misin?</h1>
+        <img src="affet.jpg" alt="Beni affet" class="photo">
+        <div class="buttons">
+            <button id="yes" class="button" onclick="goToThankYouPage()">Evet</button>
+            <button id="no" class="button" onmouseover="moveNoButton()">Hayır</button>
+        </div>
+        <p id="message">Bu siteyi yaparken seni gerçekten çok düşündüm...</p>
+    </div>
+
+    <script>
+        // "Hayır" butonunun hareketi
+        let moveCount = 0;
+        const maxMoves = 20;  // Hayır butonunun hareket etme sayısı
+
+        function moveNoButton() {
+            const noButton = document.getElementById('no');
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+
+            // Sayfa genişliği ve yüksekliği
+            const pageWidth = window.innerWidth;
+            const pageHeight = 30; // Sayfa yüksekliğini 30px olarak sabitliyoruz
+
+            if (moveCount < maxMoves) {
+                // Rastgele x ve y koordinatlarını sayfa sınırları içerisinde kalacak şekilde hesapla
+                const x = Math.random() * (pageWidth - buttonWidth);  // x koordinatını sayfa genişliğine göre sınırla
+                const y = Math.random() * (pageHeight - buttonHeight);  // y koordinatını sayfa yüksekliğine göre sınırla
+
+                // Butonun sayfa dışına çıkmaması için sınırlandırma yapılır
+                if (x + buttonWidth > pageWidth) {
+                    noButton.style.left = `${pageWidth - buttonWidth - 10}px`;  // 10px pay bırak
+                } else {
+                    noButton.style.left = `${x}px`;
+                }
+
+                if (y + buttonHeight > pageHeight) {
+                    noButton.style.top = `${pageHeight - buttonHeight - 10}px`;  // 10px pay bırak
+                } else {
+                    noButton.style.top = `${y}px`;
+                }
+
+                moveCount++;
+            }
+        }
+
+        // "Evet" butonuna tıklayınca yeni sayfaya yönlendir
+        function goToThankYouPage() {
+            window.location.href = 'thankyou.html';
+        }
+    </script>
+</body>
+</html>
